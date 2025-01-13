@@ -42,7 +42,7 @@ def test_connection():
         conn.close()
         # در اینجا اطلاعات سرور را به همراه نتیجه بر می‌گردانیم
         server_info = f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
-        return jsonify({"server_info": server_info})
+        return jsonify({server_info})
         
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
