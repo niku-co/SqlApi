@@ -40,7 +40,9 @@ def test_connection():
         cursor.execute("SELECT 1")
         result = cursor.fetchone()
         conn.close()
-        return jsonify({"success": True, "result": result[0]})
+        # در اینجا اطلاعات سرور را به همراه نتیجه بر می‌گردانیم
+        server_info = f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
+        return jsonify({"server_info": server_info})
         
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
