@@ -13,7 +13,6 @@ DATABASE_CONFIG = {
     "PWD": "3zVeYopmN2uUe6aqAyGoXKwZFEa1SjAD",
 }
 
-
 def get_connection():
     """ایجاد اتصال به دیتابیس"""
     try:
@@ -29,7 +28,6 @@ def get_connection():
     except Exception as e:
         return str(e)
 
-
 @app.route("/test-connection", methods=["GET"])
 def test_connection():
     """تست اتصال به دیتابیس"""
@@ -43,9 +41,14 @@ def test_connection():
         result = cursor.fetchone()
         conn.close()
         return jsonify({"success": True, "result": result[0]})
+        
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+@app.errorhandler(404)
+def not_found(error):
+    """مدیریت خطای 404"""
+    return jsonify({"message": "صفحه درسته"}), 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
