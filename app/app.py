@@ -51,10 +51,7 @@ def test_connection():
 def not_found(error):
     """مدیریت خطای 404"""
     server_info = f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
-    return jsonify({
-        "message": "صفحه درسته",
-        "server_info": server_info
-    }), 404
+    return jsonify({server_info}), 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
