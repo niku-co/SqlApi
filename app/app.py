@@ -40,9 +40,7 @@ def test_connection():
         cursor.execute("SELECT 1")
         result = cursor.fetchone()
         conn.close()
-        # در اینجا اطلاعات سرور را به همراه نتیجه بر می‌گردانیم
-        server_info = f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
-        return server_info
+        return f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};", 200
         
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
@@ -51,7 +49,10 @@ def test_connection():
 def not_found(error):
     """مدیریت خطای 404"""
     server_info = f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
-    return jsonify({server_info}), 404
+    return jsonify({
+        "message": "صفحه درسته",
+        "server_info": server_info
+    }), 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
