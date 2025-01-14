@@ -40,7 +40,8 @@ def test_connection():
         cursor.execute("SELECT 1")
         result = cursor.fetchone()
         conn.close()
-        return f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};", 200
+        #return f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};", 200
+        return f"{DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']}", 200
         
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
@@ -48,7 +49,8 @@ def test_connection():
 @app.errorhandler(404)
 def not_found(error):
     """مدیریت خطای 404"""
-    return f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};", 404
+    #return f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};", 404
+    return f"{DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']}", 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
