@@ -8,9 +8,6 @@ DATABASE_CONFIG = {
     "DRIVER": "{ODBC Driver 17 for SQL Server}",
     "SERVER": "c901884d-10d0-4b98-b5d0-e0d930fd85ad.hsvc.ir",
     "PORT": "30802",
-    "DATABASE": "DBtest",
-    "UID": "sa",
-    "PWD": "3zVeYopmN2uUe6aqAyGoXKwZFEa1SjAD",
 }
 
 def get_connection():
@@ -19,9 +16,6 @@ def get_connection():
         conn = pyodbc.connect(
             f"DRIVER={DATABASE_CONFIG['DRIVER']};"
             f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
-            f"DATABASE={DATABASE_CONFIG['DATABASE']};"
-            f"UID={DATABASE_CONFIG['UID']};"
-            f"PWD={DATABASE_CONFIG['PWD']};"
             f"Encrypt=yes;TrustServerCertificate=yes;"
         )
         return conn
@@ -34,7 +28,6 @@ def test_connection():
     conn = get_connection()
     if isinstance(conn, str):  # اگر خطایی رخ دهد
         return jsonify({"success": False, "error": conn}), 500
-
     try:
         cursor = conn.cursor()
         cursor.execute("SELECT 1")
@@ -42,7 +35,6 @@ def test_connection():
         conn.close()
         #return f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};", 200
         return f"{DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']}", 200
-        
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
