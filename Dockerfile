@@ -12,8 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # کپی کردن کد برنامه به داخل کانتینر
 COPY . .
 
-# پورت Flask (پورت 8000 در اینجا)
+# پورت Flask (پورت 5000 در اینجا)
 EXPOSE 5000
 
 # اجرای اپلیکیشن Flask
-CMD ["python", "app.py"]
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
