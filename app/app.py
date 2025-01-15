@@ -29,7 +29,7 @@ def get_connection():
     except Exception as e:
         return str(e)
 
-@app.route("/test-connection", methods=["GET"])
+@app.route("/", methods=["GET"])
 def test_connection():
     """تست اتصال به دیتابیس"""
     conn = get_connection()
