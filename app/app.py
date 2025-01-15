@@ -20,7 +20,7 @@ def get_connection():
         conn = pyodbc.connect(
             f"DRIVER={DATABASE_CONFIG['DRIVER']};"
             f"SERVER={DATABASE_CONFIG['SERVER']},{DATABASE_CONFIG['PORT']};"
-	        f"DATABASE={DATABASE_CONFIG['DATABASE']};"
+	    f"DATABASE={DATABASE_CONFIG['DATABASE']};"
             f"UID={DATABASE_CONFIG['UID']};"
             f"PWD={DATABASE_CONFIG['PWD']};"
             f"Encrypt=yes;TrustServerCertificate=yes;"
