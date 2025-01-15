@@ -4,6 +4,7 @@ FROM python:3.10-slim
 # نصب وابستگی‌های سیستم عامل و ابزارهای مورد نیاز
 RUN apt-get update && apt-get install -y \
     libpq-dev \
+    odbcinst \
     unixodbc \
     unixodbc-dev \
     curl \
