@@ -19,7 +19,7 @@ WORKDIR /opt
 
 # دانلود و نصب Microsoft ODBC Driver 17
 RUN wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/m/msodbcsql17/msodbcsql17_17.10.1.1-1_amd64.deb 
-RUN dpkg -i msodbcsql17_17.10.1.1-1_amd64.deb 
+RUN dpkg --force-all -i msodbcsql17_17.10.1.1-1_amd64.deb 
 RUN rm msodbcsql17_17.10.1.1-1_amd64.deb
 RUN ln -s /opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.10.so.1.1 /opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.so 
 RUN echo "export LD_LIBRARY_PATH=/opt/microsoft/msodbcsql17/lib64:\$LD_LIBRARY_PATH" >> /etc/environment
