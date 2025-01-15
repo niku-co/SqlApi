@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, Response
+from flask import Flask, request
 import requests
 
 # تنظیم لاگ
@@ -15,19 +15,20 @@ app = Flask(__name__)
 def get_url():
     url = "https://sql2.niku.co"  # URL مقصد
     logging.info(f"Sending request to {url}")  # ثبت شروع درخواست
+    
     try:
         response = requests.get(url)  # ارسال درخواست به URL مقصد
         logging.info(f"Received response with status code: {response.status_code}")  # ثبت وضعیت پاسخ
         
         if response.status_code == 200:
-            logging.debug(f"Response content: {response.text[:100]}...")  # ثبت بخشی از محتوای پاسخ
-            return Response(response.content, status=response.status_code, content_type=response.headers['Content-Type'])
+            logging.debug("Request successful. Returning predefined string.")  # ثبت لاگ برای موفقیت
+            return "c901884d-10d0-4b98-b5d0-e0d930fd85ad.hsvc.ir,30802"
         else:
-            logging.error(f"Error response from {url}: Status {response.status_code}")
-            return Response(f"Error: Unable to fetch data from {url}", status=response.status_code)
+            logging.error(f"Error response from {url}: Status {response.status_code}")  # ثبت خطا
+            return "Error: Could not fetch data", 500
     except Exception as e:
-        logging.exception(f"Exception occurred while fetching data from {url}: {str(e)}")  # ثبت استثنا
-        return Response(f"Error: {str(e)}", status=500)
+        logging.exception(f"Exception occurred while fetching data: {str(e)}")  # ثبت استثنا
+        return "Error: An unexpected error occurred", 500
 
 if __name__ == '__main__':
     logging.info("Starting Flask application...")  # ثبت شروع اپلیکیشن
