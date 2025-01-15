@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/get-url', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_url():
     # تغییر URL به https://sql2.niku.co
     url = "https://sql2.niku.co"  # URL جدید
